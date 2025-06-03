@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: journal-backend
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: python app.py
+    envVars:
+      - key: DB_HOST
+        value: mysql-yashvisoni.alwaysdata.net
+      - key: DB_NAME
+        value: yashvisoni_journaldb
+      - key: DB_USER
+        value: yashvisoni
+      - key: DB_PASSWORD
+        value: YashviyesV@3003
