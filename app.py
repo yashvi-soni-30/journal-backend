@@ -9,11 +9,12 @@ CORS(app)
 
 # --- DATABASE CONNECTION ---
 db = mysql.connector.connect(
-    host=os.getenv("mysql-yashvisoni.alwaysdata.net"),
-    user=os.getenv("yashvisoni@yashvisoni"),
-    password=os.getenv("YashviyesV@3003"),
-    database=os.getenv("yashvisoni_journaldb")
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME")
 )
+
 cursor = db.cursor(dictionary=True)
 
 # --- SAVE ENTRY ---
