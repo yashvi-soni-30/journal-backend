@@ -72,10 +72,10 @@ CORS(app)
 
 # --- DATABASE CONNECTION ---
 db = mysql.connector.connect(
-    host=os.getenv("DB_HOST"),         # e.g., 'mysql-<yourusername>.alwaysdata.net'
-    user=os.getenv("DB_USER"),         # e.g., '<yourusername>'
+    host=os.getenv("DB_HOST"),         # e.g., 'sql12.freesqldatabase.com'
+    user=os.getenv("DB_USER"),         # e.g., 'sql12783241'
     password=os.getenv("DB_PASSWORD"), # your DB password
-    database=os.getenv("DB_NAME")      # e.g., '<yourusername>_journaldb'
+    database=os.getenv("DB_NAME")      # e.g., 'sql12783241'
 )
 cursor = db.cursor(dictionary=True)
 
@@ -86,12 +86,10 @@ def register():
     email = data.get('email')
     password = data.get('password')
 
-    # Check if user already exists
     cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
     if cursor.fetchone():
         return jsonify({"error": "User already exists"}), 400
 
-    # Create new user
     cursor.execute("INSERT INTO users (email, password) VALUES (%s, %s)", (email, password))
     db.commit()
     return jsonify({"message": "User registered successfully"}), 201
@@ -151,5 +149,5 @@ def delete_entry(entry_id):
 
 # --- RUN APP ---
 if __name__ == '__main__':
-    app.run(debug=True)
-
+    port = int(os.environ.get('PORT', 5000))  # Render provides PORT automatically
+    app.run(host='0.0.0.0', port=port, debug=True)
